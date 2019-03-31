@@ -49,8 +49,8 @@ def main():
     #     run_test_reverse()
     # if m1t.is_implemented('slope'):
     #     run_test_slope()
-    if m1t.is_implemented('length'):
-        run_test_length()
+    # if m1t.is_implemented('length'):
+    #     run_test_length()
     # if m1t.is_implemented('get_number_of_clones'):
     #     run_test_get_number_of_clones()
     # if m1t.is_implemented('line_plus'):
@@ -61,8 +61,8 @@ def main():
     #     run_test_midpoint()
     # if m1t.is_implemented('is_parallel'):
     #     run_test_is_parallel()
-    # if m1t.is_implemented('reset'):
-    #     run_test_reset()
+    if m1t.is_implemented('reset'):
+        run_test_reset()
 
 
 ###############################################################################
@@ -228,6 +228,7 @@ class Line(object):
 
         self.start = start.clone()
         self.end = end.clone()
+        self.total_clones_made = 0
 
     def __repr__(self):
         """
@@ -338,6 +339,7 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
 
+        self.total_clones_made = self.total_clones_made + 1
         return Line(self.start,self.end)
 
     def reverse(self):
@@ -417,7 +419,7 @@ class Line(object):
         # ---------------------------------------------------------------------
 
         if (self.end.x - self.start.x) > 0:
-            return (self.end.y - self.start.y) / (self.end.x - self.start.x)
+            return round((self.end.y - self.start.y) / (self.end.x - self.start.x),12)
         else:
             return math.inf
 
@@ -445,7 +447,7 @@ class Line(object):
           :rtype: float
         """
         # ---------------------------------------------------------------------
-        # TODO: 7.
+        # DONE: 7.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -454,7 +456,8 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
 
-        self
+        length = math.sqrt((self.end.y - self.start.y)**2 + (self.end.x - self.start.x)**2)
+        return length
 
     def get_number_of_clones(self):
         """
@@ -487,7 +490,7 @@ class Line(object):
           :rtype: int:
         """
         # ---------------------------------------------------------------------
-        # TODO: 8.
+        # DONE: 8.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -496,16 +499,7 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
 
-        line1 = Line(Point(500, 20), Point(100, 8))
-        line2 = line1.clone()
-        line3 = line1.clone()
-        line4 = line3.clone()
-        line5 = line1.clone()
-        print(line1.get_number_of_clones())
-        print(line2.get_number_of_clones())
-        print(line3.get_number_of_clones())
-        print(line4.get_number_of_clones())
-        print(line5.get_number_of_clones())
+        return self.total_clones_made
 
     def line_plus(self, other_line):
         """
@@ -532,7 +526,7 @@ class Line(object):
           :rtype: Line:
         """
         # ---------------------------------------------------------------------
-        # TODO: 9.
+        # : 9.DONE
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -541,10 +535,8 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
 
-        line1 = Line(Point(500, 20), Point(100, 8))
-        line2 = Line(Point(100, 13), Point(400, 8))
-        line3 = line1.line_plus(line2)
-        print(line3)
+        new_line = Line(Point((self.start.x + other_line.start.x),(self.start.y + other_line.start.y)),Point((self.end.x + other_line.end.x),(self.end.y + other_line.end.y)))
+        return new_line
 
     def line_minus(self, other_line):
         """
@@ -571,7 +563,7 @@ class Line(object):
           :rtype: Line:
         """
         # ---------------------------------------------------------------------
-        # TODO: 10.
+        # DONE: 10.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -580,10 +572,9 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
 
-        line1 = Line(Point(500, 20), Point(100, 8))
-        line2 = Line(Point(100, 13), Point(400, 8))
-        line3 = line1.line_minus(line2)
-        print(line3)
+        new_line = Line(Point((self.start.x - other_line.start.x), (self.start.y - other_line.start.y)),
+                        Point((self.end.x - other_line.end.x), (self.end.y - other_line.end.y)))
+        return new_line
 
     def midpoint(self):
         """
@@ -603,7 +594,7 @@ class Line(object):
           :rtype: Point
         """
         # ---------------------------------------------------------------------
-        # TODO: 11.
+        # DONE: 11.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -611,12 +602,8 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
-
-        p1 = Point(3, 10)
-        p2 = Point(9, 20)
-        line1 = Line(p1, p2)
-
-        print(line1.midpoint())  # Should print: Point(6, 15)
+        midpoint = Point((self.end.x + self.start.x) /2 , (self.end.y + self.start.y) / 2)
+        return midpoint
 
     def is_parallel(self, line2):
         """
@@ -682,6 +669,15 @@ class Line(object):
         # are different from each other.
         #######################################################################
 
+        a = self.slope()
+        b = line2.slope()
+        print(a,b)
+
+        if round(a, 12) == round(b, 12):
+            return True
+        else:
+            return False
+
     def reset(self):
         """
         What comes in:
@@ -721,6 +717,11 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
 
+        x = self.start
+        y = self.end
+
+        self.start = x
+        self.end = y
 
 ###############################################################################
 # The TEST functions for the  Line  class begin here.
