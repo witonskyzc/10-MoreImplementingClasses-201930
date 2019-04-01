@@ -8,7 +8,6 @@ Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
 
 import rosegraphics as rg
 
-
 def main():
     """
     Calls the test functions.
@@ -20,11 +19,10 @@ def main():
     # print('Un-comment the calls in MAIN one by one')
     # print(' to run the testing code as you complete the TODOs.')
 
-    # run_test_simple_t()
-    # run_test_set_colors()
-    # run_test_move_by()
+    run_test_simple_t()
+    run_test_set_colors()
+    run_test_move_by()
     run_test_clone()
-
 
 def run_test_simple_t():
     """
@@ -52,7 +50,6 @@ def run_test_simple_t():
     print("See graphics window and compare to the simple_t PDF")
     window.close_on_mouse_click()
 
-
 def run_test_set_colors():
     """ Tests for the set_colors method.  See the set_colors PDF for expected output. """
     window = rg.RoseWindow(600, 400, 'Test 2 - Colorful Ts')
@@ -67,7 +64,6 @@ def run_test_set_colors():
     t3.attach_to(window)
     window.render()
     window.close_on_mouse_click()
-
 
 def run_test_move_by():
     """ Tests for the move_by method.  See the move_by PDF for expected output. """
@@ -85,7 +81,6 @@ def run_test_move_by():
         window.render(0.05)
     window.close_on_mouse_click()
 
-
 def run_test_clone():
     """ Tests for the clone method.  See the clone PDF for expected output. """
     window = rg.RoseWindow(650, 400, 'Test 4 - Cloning Ts')
@@ -95,6 +90,8 @@ def run_test_clone():
         t = first_t.clone()
         if k < 2:
             t.set_colors('white', 'black')
+        if k >= 2:
+            t.set_colors('blue', 'cyan')
         t.move_by(100 * k, 20 * k)
         t.attach_to(window)
     first_t.move_by(0, 200)
@@ -102,11 +99,9 @@ def run_test_clone():
     window.render()
     window.close_on_mouse_click()
 
-
 ###############################################################################
 # The   CapitalT   class (and its methods) begins here.
 ###############################################################################
-
 
 class CapitalT(object):
     """
