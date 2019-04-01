@@ -41,28 +41,28 @@ def main():
     a  TEST   function will not be called until you begin work
     on the code that it is testing.
     """
-    # if m1t.is_implemented('__init__'):
-    #     run_test_init()
-    # if m1t.is_implemented('clone'):
-    #     run_test_clone()
-    # if m1t.is_implemented('reverse'):
-    #     run_test_reverse()
-    # if m1t.is_implemented('slope'):
-    #     run_test_slope()
-    # if m1t.is_implemented('length'):
-    #     run_test_length()
-    # if m1t.is_implemented('get_number_of_clones'):
-    #     run_test_get_number_of_clones()
-    # if m1t.is_implemented('line_plus'):
-    #     run_test_line_plus()
-    # if m1t.is_implemented('line_minus'):
-    #     run_test_line_minus()
-    # if m1t.is_implemented('midpoint'):
-    #     run_test_midpoint()
+    if m1t.is_implemented('__init__'):
+        run_test_init()
+    if m1t.is_implemented('clone'):
+        run_test_clone()
+    if m1t.is_implemented('reverse'):
+        run_test_reverse()
+    if m1t.is_implemented('slope'):
+        run_test_slope()
+    if m1t.is_implemented('length'):
+        run_test_length()
+    if m1t.is_implemented('get_number_of_clones'):
+        run_test_get_number_of_clones()
+    if m1t.is_implemented('line_plus'):
+        run_test_line_plus()
+    if m1t.is_implemented('line_minus'):
+        run_test_line_minus()
+    if m1t.is_implemented('midpoint'):
+        run_test_midpoint()
     if m1t.is_implemented('is_parallel'):
         run_test_is_parallel()
-    # if m1t.is_implemented('reset'):
-    #     run_test_reset()
+    if m1t.is_implemented('reset'):
+        run_test_reset()
 
 
 ###############################################################################
@@ -225,6 +225,9 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
+
+        self.initial_x = start
+        self.initial_y = end
 
         self.start = start.clone()
         self.end = end.clone()
@@ -633,7 +636,7 @@ class Line(object):
           :rtype: bool
         """
         # ---------------------------------------------------------------------
-        # TODO: 12.
+        # DONE: 12.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -708,7 +711,7 @@ class Line(object):
             print(line2)  # Should print: Line[(0, 1), (10, 20)]
         """
         # ---------------------------------------------------------------------
-        # TODO: 13.
+        # DONE: 13.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -717,8 +720,8 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
 
-        x = self.start
-        y = self.end
+        x = self.initial_x
+        y = self.initial_y
 
         self.start = x
         self.end = y
