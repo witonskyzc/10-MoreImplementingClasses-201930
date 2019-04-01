@@ -59,10 +59,10 @@ def main():
     #     run_test_line_minus()
     # if m1t.is_implemented('midpoint'):
     #     run_test_midpoint()
-    # if m1t.is_implemented('is_parallel'):
-    #     run_test_is_parallel()
-    if m1t.is_implemented('reset'):
-        run_test_reset()
+    if m1t.is_implemented('is_parallel'):
+        run_test_is_parallel()
+    # if m1t.is_implemented('reset'):
+    #     run_test_reset()
 
 
 ###############################################################################
@@ -418,10 +418,10 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # ---------------------------------------------------------------------
 
-        if (self.end.x - self.start.x) > 0:
-            return round((self.end.y - self.start.y) / (self.end.x - self.start.x),12)
-        else:
+        if (self.end.x - self.start.x) == 0:
             return math.inf
+        else:
+            return round((self.end.y - self.start.y) / (self.end.x - self.start.x),12)
 
     def length(self):
         """
@@ -945,7 +945,6 @@ def run_test_is_parallel():
 
     print('The above should print:')
     print('  True,  True,  False,  False,  True,  True')
-
 
 def run_test_reset():
     """ Tests the   reset   method of the Line class. """
