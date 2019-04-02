@@ -274,7 +274,6 @@ class CapitalT(object):
         #        the T moves through, but there is only one T at any moment.
         # ---------------------------------------------------------------------
 
-
         self.h_rect.corner_1.x = self.h_rect.corner_1.x + dx
         self.h_rect.corner_1.y = self.h_rect.corner_1.y + dy
 
